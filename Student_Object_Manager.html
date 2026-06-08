@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Object Manager</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Segoe UI, sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#667eea,#764ba2);
+            padding:20px;
+        }
+
+        .container{
+            width:600px;
+            background:white;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:20px;
+            color:#333;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            margin-bottom:10px;
+            border:1px solid #ddd;
+            border-radius:8px;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            margin-top:8px;
+            border:none;
+            border-radius:8px;
+            background:#667eea;
+            color:white;
+            cursor:pointer;
+            font-size:15px;
+        }
+
+        button:hover{
+            background:#5563d6;
+        }
+
+        #result{
+            margin-top:20px;
+            padding:15px;
+            background:#f4f6ff;
+            border-radius:10px;
+            line-height:1.8;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>🎓 Student Object Manager</h2>
+
+    <input type="number" id="rollNo" placeholder="Roll Number">
+
+    <input type="text" id="name" placeholder="Student Name">
+
+    <input type="number" id="marks" placeholder="Marks">
+
+    <input type="text" id="address" placeholder="Address">
+
+    <button onclick="createStudent()">
+        Create Student
+    </button>
+
+    <button onclick="updateMarks()">
+        Update Marks
+    </button>
+
+    <button onclick="addProperty()">
+        Add New Property
+    </button>
+
+    <button onclick="deleteProperty()">
+        Delete Property
+    </button>
+
+    <button onclick="displayStudent()">
+        Display Student
+    </button>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+let student = {};
+
+function createStudent(){
+
+    student = {
+
+        rollNo: Number(document.getElementById("rollNo").value),
+
+        name: document.getElementById("name").value,
+
+        marks: Number(document.getElementById("marks").value),
+
+        address: document.getElementById("address").value
+
+    };
+
+    displayStudent();
+}
+
+function updateMarks(){
+
+    let newMarks =
+    prompt("Enter New Marks");
+
+    if(newMarks !== null){
+
+        student.marks =
+        Number(newMarks);
+
+        displayStudent();
+    }
+}
+
+function addProperty(){
+
+    let propertyName =
+    prompt("Enter Property Name");
+
+    let propertyValue =
+    prompt("Enter Property Value");
+
+    if(propertyName){
+
+        student[propertyName] =
+        propertyValue;
+
+        displayStudent();
+    }
+}
+
+function deleteProperty(){
+
+    let propertyName =
+    prompt("Enter Property Name To Delete");
+
+    delete student[propertyName];
+
+    displayStudent();
+}
+
+function displayStudent(){
+
+    let output = "";
+
+    for(let key in student){
+
+        output +=
+        `<b>${key}</b> : ${student[key]} <br>`;
+    }
+
+    document.getElementById("result").innerHTML =
+    output;
+}
+
+</script>
+
+</body>
+</html>

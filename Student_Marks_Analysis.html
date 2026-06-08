@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Performance Analyzer</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#0f172a;
+padding:20px;
+}
+
+.container{
+width:800px;
+background:#1e293b;
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 25px rgba(0,0,0,.4);
+}
+
+h1{
+text-align:center;
+color:white;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+margin-bottom:15px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+background:#06b6d4;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+transform:translateY(-2px);
+}
+
+.results{
+margin-top:25px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+}
+
+.card{
+background:#334155;
+padding:20px;
+border-radius:15px;
+text-align:center;
+color:white;
+}
+
+.card h3{
+margin-bottom:10px;
+color:#06b6d4;
+}
+
+.value{
+font-size:28px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📊 Student Performance Analyzer</h1>
+
+<input
+type="text"
+id="marks"
+placeholder="Enter marks (Example: 78,85,92,88,95)"
+>
+
+<button onclick="analyzeMarks()">
+Generate Report
+</button>
+
+<div class="results" id="result"></div>
+
+</div>
+
+<script>
+
+function analyzeMarks(){
+
+let marks =
+document.getElementById("marks")
+.value
+.split(",")
+.map(Number);
+
+let total =
+marks.reduce((sum,m)=>sum+m,0);
+
+let average =
+(total / marks.length).toFixed(2);
+
+let highest =
+Math.max(...marks);
+
+let lowest =
+Math.min(...marks);
+
+document.getElementById("result").innerHTML =
+
+`
+<div class="card">
+<h3>Total Marks</h3>
+<div class="value">${total}</div>
+</div>
+
+<div class="card">
+<h3>Average Score</h3>
+<div class="value">${average}</div>
+</div>
+
+<div class="card">
+<h3>Highest Mark</h3>
+<div class="value">${highest}</div>
+</div>
+
+<div class="card">
+<h3>Lowest Mark</h3>
+<div class="value">${lowest}</div>
+</div>
+`;
+
+}
+
+</script>
+
+</body>
+</html>

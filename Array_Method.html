@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Array Insights Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#0f172a;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:1000px;
+    background:#1e293b;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(0,0,0,.4);
+}
+
+h1{
+    text-align:center;
+    color:white;
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#06b6d4;
+    color:white;
+    cursor:pointer;
+}
+
+.dashboard{
+    margin-top:25px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.card{
+    background:#334155;
+    padding:20px;
+    border-radius:15px;
+    color:white;
+}
+
+.card h3{
+    color:#06b6d4;
+    margin-bottom:10px;
+}
+
+.result{
+    font-size:18px;
+    line-height:1.8;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📊 Array Insights Dashboard</h1>
+
+<input
+type="text"
+id="numbers"
+placeholder="Enter numbers (Example: 10,20,30,40,50)"
+>
+
+<button onclick="analyzeArray()">
+Analyze Array
+</button>
+
+<div id="dashboard"></div>
+
+</div>
+
+<script>
+
+function analyzeArray(){
+
+    let numbers =
+    document.getElementById("numbers")
+    .value
+    .split(",")
+    .map(Number);
+
+    let mapped =
+    numbers.map(num => num * 2);
+
+    let filtered =
+    numbers.filter(num => num > 25);
+
+    let found =
+    numbers.find(num => num > 25);
+
+    let total =
+    numbers.reduce(
+    (sum,num)=>sum+num,0);
+
+    document.getElementById("dashboard")
+    .innerHTML =
+
+    `
+    <div class="dashboard">
+
+        <div class="card">
+
+            <h3>📝 Original Array</h3>
+
+            <div class="result">
+            [${numbers.join(", ")}]
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🚀 map()</h3>
+
+            <div class="result">
+            [${mapped.join(", ")}]
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🔍 filter()</h3>
+
+            <div class="result">
+            [${filtered.join(", ")}]
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>🎯 find()</h3>
+
+            <div class="result">
+            ${found}
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>➕ reduce()</h3>
+
+            <div class="result">
+            ${total}
+            </div>
+
+        </div>
+
+    </div>
+    `;
+
+}
+
+</script>
+
+</body>
+</html>

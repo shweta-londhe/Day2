@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Number Separator</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#0f172a;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.container{
+width:900px;
+background:#1e293b;
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 25px rgba(0,0,0,.4);
+}
+
+h1{
+text-align:center;
+color:white;
+margin-bottom:25px;
+}
+
+input{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+margin-bottom:15px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:14px;
+background:#06b6d4;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+}
+
+.result-grid{
+margin-top:25px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.panel{
+background:#334155;
+padding:20px;
+border-radius:15px;
+}
+
+.panel h2{
+color:#06b6d4;
+margin-bottom:15px;
+text-align:center;
+}
+
+.number-box{
+display:inline-block;
+background:#475569;
+padding:10px 15px;
+border-radius:10px;
+margin:5px;
+color:white;
+font-weight:bold;
+}
+
+.summary{
+margin-top:20px;
+text-align:center;
+color:white;
+font-size:18px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🔍 Number Separator Tool</h1>
+
+<input
+type="text"
+id="numbers"
+placeholder="Example: 10,15,20,25,30">
+
+<button onclick="analyzeNumbers()">
+Analyze Numbers
+</button>
+
+<div class="summary" id="summary"></div>
+
+<div class="result-grid">
+
+<div class="panel">
+
+<h2>✅ Even Numbers</h2>
+
+<div id="evenBox"></div>
+
+</div>
+
+<div class="panel">
+
+<h2>🔥 Odd Numbers</h2>
+
+<div id="oddBox"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function analyzeNumbers(){
+
+let numbers =
+document.getElementById("numbers")
+.value
+.split(",")
+.map(Number);
+
+let even =
+numbers.filter(n=>n%2===0);
+
+let odd =
+numbers.filter(n=>n%2!==0);
+
+document.getElementById("evenBox").innerHTML =
+even.map(num=>
+`<span class="number-box">${num}</span>`
+).join("");
+
+document.getElementById("oddBox").innerHTML =
+odd.map(num=>
+`<span class="number-box">${num}</span>`
+).join("");
+
+document.getElementById("summary").innerHTML =
+`
+Total Numbers : ${numbers.length}
+&nbsp; | &nbsp;
+Even : ${even.length}
+&nbsp; | &nbsp;
+Odd : ${odd.length}
+`;
+
+}
+
+</script>
+
+</body>
+</html>

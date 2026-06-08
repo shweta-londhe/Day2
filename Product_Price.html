@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shopping Cart Analytics</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#0f172a;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.container{
+width:900px;
+background:#1e293b;
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 25px rgba(0,0,0,.4);
+}
+
+h1{
+text-align:center;
+color:white;
+margin-bottom:25px;
+}
+
+input{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+margin-bottom:15px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:14px;
+background:#06b6d4;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+}
+
+.dashboard{
+margin-top:25px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+}
+
+.card{
+background:#334155;
+padding:20px;
+border-radius:15px;
+text-align:center;
+color:white;
+}
+
+.card h3{
+color:#06b6d4;
+margin-bottom:10px;
+}
+
+.value{
+font-size:28px;
+font-weight:bold;
+}
+
+.product-list{
+margin-top:20px;
+background:#334155;
+padding:20px;
+border-radius:15px;
+color:white;
+}
+
+.price-tag{
+display:inline-block;
+padding:10px 15px;
+margin:5px;
+border-radius:10px;
+background:#475569;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🛒 Shopping Cart Analytics</h1>
+
+<input
+type="text"
+id="prices"
+placeholder="Enter prices (Example: 100,250,400,150)"
+>
+
+<button onclick="analyzeCart()">
+Generate Analytics
+</button>
+
+<div id="dashboard"></div>
+
+</div>
+
+<script>
+
+function analyzeCart(){
+
+let prices =
+document.getElementById("prices")
+.value
+.split(",")
+.map(Number);
+
+let total =
+prices.reduce((sum,p)=>sum+p,0);
+
+let average =
+(total/prices.length).toFixed(2);
+
+let highest =
+Math.max(...prices);
+
+let lowest =
+Math.min(...prices);
+
+document.getElementById("dashboard").innerHTML =
+
+`
+<div class="dashboard">
+
+<div class="card">
+<h3>Total Cost</h3>
+<div class="value">₹${total}</div>
+</div>
+
+<div class="card">
+<h3>Average Price</h3>
+<div class="value">₹${average}</div>
+</div>
+
+<div class="card">
+<h3>Highest Item</h3>
+<div class="value">₹${highest}</div>
+</div>
+
+<div class="card">
+<h3>Lowest Item</h3>
+<div class="value">₹${lowest}</div>
+</div>
+
+</div>
+
+<div class="product-list">
+
+<h3>Products Added</h3>
+
+${prices.map(price=>
+`<span class="price-tag">₹${price}</span>`
+).join("")}
+
+</div>
+`;
+
+}
+
+</script>
+
+</body>
+</html>
